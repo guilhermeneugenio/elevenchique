@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const villas = [
+	{ name: 'Villa Tucha', slug: 'villa-tucha', description: 'A charming retreat nestled in nature.' },
+	{ name: 'Villa Xique 11', slug: 'villa-xique-11', description: 'Modern comfort with stunning views.' },
+	{ name: 'Villa Xique 9', slug: 'villa-xique-9', description: 'Elegant living by the countryside.' },
+];
+---
+
+<Layout title="Elevenchique — Villas">
+	<main>
+		<header>
+			<h1>Elevenchique</h1>
+			<p>Select a villa to explore its gallery</p>
+		</header>
+		<div class="grid">
+			{villas.map(villa => (
+				<a href={`/${villa.slug}`} class="card">
+					<h2>{villa.name}</h2>
+					<p>{villa.description}</p>
+					<span class="cta">View gallery →</span>
+				</a>
+			))}
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	header h1 {
+		font-size: 2.8rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin: 0 0 0.5rem;
+	}
+
+	header p {
+		font-size: 1.1rem;
+		color: #666;
+		margin: 0;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.card {
+		display: block;
+		padding: 2rem;
+		border: 1px solid #e0dbd4;
+		border-radius: 12px;
+		background: #fff;
+		text-decoration: none;
+		color: inherit;
+		transition: box-shadow 0.2s, transform 0.2s;
+	}
+
+	.card:hover {
+		box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+		transform: translateY(-2px);
+	}
+
+	.card h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.4rem;
+	}
+
+	.card p {
+		margin: 0 0 1rem;
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.cta {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #8b6f47;
+	}
+</style>
