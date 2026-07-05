@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import GalleryModal from '../components/GalleryModal.astro';
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 	'../assets/Villa Xique 9/*.jpg',
@@ -13,13 +14,32 @@ const images = Object.values(imageModules).map(m => m.default);
 	<main>
 		<nav><a href="/">← Back to Villas</a></nav>
 		<h1>Villa Xique 9</h1>
+		<div class="info">
+			<p class="price">Desde <strong>€95/dia</strong></p>
+			<p class="description">Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento com ar condicionado tem 2 quartos, uma sala de estar, uma cozinha totalmente equipada e 2 casas de banho com chuveiro, com todas as comodidades providenciadas.</p>
+			<p class="minimum">Mínimo 4 noites</p>
+			<ul class="features">
+				<li>🛏️ 2 Quartos</li>
+				<li>👥 4+1 pax</li>
+				<li>🚿 2 WCs</li>
+				<li>🍽️ Totalmente equipada</li>
+				<li>🔑 Self Check-in</li>
+				<li>🛒 Perto do Centro</li>
+			</ul>
+			<div class="booking">
+				<a href="https://www.airbnb.pt/rooms/949875923878022514?guests=1&adults=1&s=67&unique_share_id=a0af3c92-06f4-480b-ab36-4fc48026e6b6" target="_blank" rel="noopener" class="booking-link airbnb">Airbnb</a>
+				<a href="https://holidu.go.link/holidu.pt/d/53422304?utm_term=CLIPBOARD&utm_source=web_share&adj_t=1m2swn8m&adj_redirect=https://www.holidu.pt/d/53422304?utm_source%3Dweb_share%26utm_term%3DCLIPBOARD" target="_blank" rel="noopener" class="booking-link holidu">Holidu</a>
+				<a href="https://www.booking.com/Share-gAKhBZs" target="_blank" rel="noopener" class="booking-link bookingcom">Booking.com</a>
+			</div>
+		</div>
 		<div class="gallery">
 			{images.map((img, i) => (
-				<a href={img.src} target="_blank" rel="noopener" class="photo">
+				<button class="photo" data-src={img.src} data-alt={`Villa Xique 9 ${i + 1}`}>
 					<Image src={img} alt={`Villa Xique 9 ${i + 1}`} widths={[400, 800]} sizes="(max-width: 600px) 100vw, 400px" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
-				</a>
+				</button>
 			))}
 		</div>
+		<GalleryModal />
 	</main>
 </Layout>
 
@@ -48,9 +68,90 @@ const images = Object.values(imageModules).map(m => m.default);
 	h1 {
 		font-size: 2.2rem;
 		font-weight: 700;
-		margin: 0 0 2rem;
+		margin: 0 0 1rem;
 		letter-spacing: -0.02em;
 	}
+
+	h1 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	h1 a:hover {
+		text-decoration: underline;
+	}
+
+	.info {
+		margin-bottom: 2rem;
+	}
+
+	.price {
+		font-size: 1.1rem;
+		margin: 0 0 0.75rem;
+		color: #555;
+	}
+
+	.price strong {
+		color: #1a1a1a;
+	}
+
+	.description {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: #444;
+		margin: 0 0 1rem;
+		max-width: 72ch;
+	}
+
+	.minimum {
+		display: inline-block;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: #8b6f47;
+		border: 1px solid #c9a97a;
+		border-radius: 6px;
+		padding: 0.3rem 0.75rem;
+		margin: 0 0 1.25rem;
+	}
+
+	.features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+	}
+
+	.features li {
+		font-size: 0.95rem;
+		color: #444;
+	}
+
+	.booking {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.booking-link {
+		display: inline-block;
+		padding: 0.45rem 1rem;
+		border-radius: 6px;
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: opacity 0.2s;
+	}
+
+	.booking-link:hover {
+		opacity: 0.85;
+	}
+
+	.airbnb { background: #ff385c; color: #fff; }
+	.holidu { background: #00a86b; color: #fff; }
+	.bookingcom { background: #003580; color: #fff; }
 
 	.gallery {
 		display: grid;
@@ -64,6 +165,9 @@ const images = Object.values(imageModules).map(m => m.default);
 		border-radius: 8px;
 		aspect-ratio: 4/3;
 		background: #e8e3dc;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 	}
 
 	.photo img {

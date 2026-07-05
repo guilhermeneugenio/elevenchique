@@ -2,9 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 
 const villas = [
-	{ name: 'Villa Tucha', slug: 'villa-tucha', description: 'A charming retreat nestled in nature.' },
-	{ name: 'Villa Xique 11', slug: 'villa-xique-11', description: 'Modern comfort with stunning views.' },
-	{ name: 'Villa Xique 9', slug: 'villa-xique-9', description: 'Elegant living by the countryside.' },
+	{
+		name: 'Villa Tucha',
+		slug: 'villa-tucha',
+		url: 'https://rose-tambourine-abyl.squarespace.com/villa-tucha',
+		price: '€260/dia',
+		description: 'Em Alvor, esta villa dispõe de acomodações com acesso Wi-Fi gratuito, ar condicionado, 4 quartos, 5 casas de banho, roupa de cama, toalhas, uma televisão com canais por cabo, uma cozinha totalmente equipada e um terraço com vista da montanha.',
+		minimum: 'Mínimo 5 noites',
+	},
+	{
+		name: 'Villa Xique 9',
+		slug: 'villa-xique-9',
+		url: 'https://rose-tambourine-abyl.squarespace.com/villa-xique-9',
+		price: '€95/dia',
+		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento com ar condicionado tem 2 quartos, uma sala de estar, uma cozinha totalmente equipada e 2 casas de banho com chuveiro, com todas as comodidades providenciadas.',
+		minimum: 'Mínimo 4 noites',
+	},
+	{
+		name: 'Villa Xique 11',
+		slug: 'villa-xique-11',
+		url: 'https://rose-tambourine-abyl.squarespace.com/villa-xique-11',
+		price: '€80/dia',
+		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa.',
+		minimum: 'Mínimo 4 noites',
+	},
 ];
 ---
 
@@ -18,8 +39,10 @@ const villas = [
 			{villas.map(villa => (
 				<a href={`/${villa.slug}`} class="card">
 					<h2>{villa.name}</h2>
-					<p>{villa.description}</p>
-					<span class="cta">View gallery →</span>
+					{villa.price && <p class="price">Desde <strong>{villa.price}</strong></p>}
+					<p class="description">{villa.description}</p>
+					{villa.minimum && <p class="minimum">{villa.minimum}</p>}
+					<span class="cta">Ver galeria →</span>
 				</a>
 			))}
 		</div>
@@ -79,9 +102,33 @@ const villas = [
 	}
 
 	.card p {
-		margin: 0 0 1rem;
+		margin: 0 0 0.75rem;
 		color: #666;
 		font-size: 0.95rem;
+	}
+
+	.price {
+		font-size: 1rem;
+		color: #555;
+	}
+
+	.price strong {
+		color: #1a1a1a;
+	}
+
+	.description {
+		line-height: 1.6;
+	}
+
+	.minimum {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #8b6f47;
+		border: 1px solid #c9a97a;
+		border-radius: 6px;
+		padding: 0.25rem 0.6rem;
+		margin: 0 0 1rem;
 	}
 
 	.cta {
