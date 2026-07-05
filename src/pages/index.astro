@@ -16,7 +16,7 @@ const villas = [
 		</header>
 		<div class="grid">
 			{villas.map(villa => (
-				<a href={`${import.meta.env.BASE_URL}/${villa.slug}`} class="card">
+				<a href={`/${villa.slug}`} class="card">
 					<h2>{villa.name}</h2>
 					<p>{villa.description}</p>
 					<span class="cta">View gallery →</span>
