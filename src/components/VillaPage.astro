@@ -1,0 +1,211 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import GalleryModal from './GalleryModal.astro';
+
+interface Feature {
+	key: string;
+	text: string;
+}
+
+interface Booking {
+	href: string;
+	cls: 'airbnb' | 'holidu' | 'bookingcom';
+	label: string;
+}
+
+interface Props {
+	title: string;
+	name: string;
+	url?: string;
+	price: string;
+	descKey: string;
+	desc: string;
+	minKey: string;
+	min: string;
+	features: Feature[];
+	bookings?: Booking[];
+	images: ImageMetadata[];
+}
+
+const { title, name, url, price, descKey, desc, minKey, min, features, bookings, images } =
+	Astro.props;
+---
+
+<Layout title={title}>
+	<main>
+		<nav><a href="/" data-i18n="nav.back">← Villas</a></nav>
+		<h1>{url ? <a href={url} target="_blank" rel="noopener">{name}</a> : name}</h1>
+		<div class="info">
+			<p class="price"><span data-i18n="card.from">Desde</span> <strong>{price}</strong></p>
+			<p class="description" data-i18n={descKey}>{desc}</p>
+			<p class="minimum" data-i18n={minKey}>{min}</p>
+			<ul class="features">
+				{features.map(f => <li data-i18n={f.key}>{f.text}</li>)}
+			</ul>
+			{bookings && bookings.length > 0 && (
+				<div class="booking">
+					{bookings.map(b => (
+						<a href={b.href} target="_blank" rel="noopener" class={`booking-link ${b.cls}`}>
+							{b.label}
+						</a>
+					))}
+				</div>
+			)}
+		</div>
+		<div class="gallery">
+			{images.map((img, i) => (
+				<button class="photo" data-src={img.src} data-alt={`${name} ${i + 1}`}>
+					<Image
+						src={img}
+						alt={`${name} ${i + 1}`}
+						widths={[400, 800]}
+						sizes="(max-width: 600px) 100vw, 400px"
+						loading={i === 0 ? 'eager' : 'lazy'}
+						fetchpriority={i === 0 ? 'high' : 'auto'}
+					/>
+				</button>
+			))}
+		</div>
+		<GalleryModal />
+	</main>
+</Layout>
+
+<style>
+	main {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 1.5rem 4rem;
+	}
+
+	nav {
+		margin-bottom: 1.5rem;
+	}
+
+	nav a {
+		color: #8b6f47;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	nav a:hover {
+		text-decoration: underline;
+	}
+
+	h1 {
+		font-size: 2.2rem;
+		font-weight: 700;
+		margin: 0 0 1rem;
+		letter-spacing: -0.02em;
+	}
+
+	h1 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	h1 a:hover {
+		text-decoration: underline;
+	}
+
+	.info {
+		margin-bottom: 2rem;
+	}
+
+	.price {
+		font-size: 1.1rem;
+		margin: 0 0 0.75rem;
+		color: #555;
+	}
+
+	.price strong {
+		color: #1a1a1a;
+	}
+
+	.description {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: #444;
+		margin: 0 0 1rem;
+		max-width: 72ch;
+	}
+
+	.minimum {
+		display: inline-block;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: #8b6f47;
+		border: 1px solid #c9a97a;
+		border-radius: 6px;
+		padding: 0.3rem 0.75rem;
+		margin: 0 0 1.25rem;
+	}
+
+	.features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.5rem;
+	}
+
+	.features li {
+		font-size: 0.95rem;
+		color: #444;
+	}
+
+	.booking {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.booking-link {
+		display: inline-block;
+		padding: 0.45rem 1rem;
+		border-radius: 6px;
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: opacity 0.2s;
+	}
+
+	.booking-link:hover {
+		opacity: 0.85;
+	}
+
+	.airbnb { background: #ff385c; color: #fff; }
+	.holidu { background: #00a86b; color: #fff; }
+	.bookingcom { background: #003580; color: #fff; }
+
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 1rem;
+	}
+
+	.photo {
+		display: block;
+		overflow: hidden;
+		border-radius: 8px;
+		aspect-ratio: 4/3;
+		background: #e8e3dc;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.photo:hover img {
+		transform: scale(1.04);
+	}
+</style>

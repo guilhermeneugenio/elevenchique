@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import Layout from '../layouts/Layout.astro';
-import GalleryModal from '../components/GalleryModal.astro';
+import VillaPage from '../components/VillaPage.astro';
 
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 	'../assets/Villa Xique 11/*.jpg',
@@ -10,144 +8,26 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 const images = Object.values(imageModules).map(m => m.default);
 ---
 
-<Layout title="Villa Xique 11 — Elevenchique">
-	<main>
-		<nav><a href="/">← Back to Villas</a></nav>
-		<h1>Villa Xique 11</h1>
-		<div class="info">
-			<p class="price">Desde <strong>€80/dia</strong></p>
-			<p class="description">Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa.</p>
-			<p class="minimum">Mínimo 4 noites</p>
-			<ul class="features">
-				<li>🛏️ 1 cama de casal</li>
-				<li>👥 2+1 pax</li>
-				<li>🚿 1 WC</li>
-				<li>🍽️ Totalmente equipada</li>
-				<li>🔑 Self Check-in</li>
-				<li>🛒 Perto do Centro</li>
-			</ul>
-		</div>
-		<div class="gallery">
-			{images.map((img, i) => (
-				<button class="photo" data-src={img.src} data-alt={`Villa Xique 11 ${i + 1}`}>
-					<Image src={img} alt={`Villa Xique 11 ${i + 1}`} widths={[400, 800]} sizes="(max-width: 600px) 100vw, 400px" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
-				</button>
-			))}
-		</div>
-		<GalleryModal />
-	</main>
-</Layout>
-
-<style>
-	main {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 2rem 1.5rem 4rem;
-	}
-
-	nav {
-		margin-bottom: 1.5rem;
-	}
-
-	nav a {
-		color: #8b6f47;
-		text-decoration: none;
-		font-weight: 600;
-		font-size: 0.95rem;
-	}
-
-	nav a:hover {
-		text-decoration: underline;
-	}
-
-	h1 {
-		font-size: 2.2rem;
-		font-weight: 700;
-		margin: 0 0 1rem;
-		letter-spacing: -0.02em;
-	}
-
-	h1 a {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	h1 a:hover {
-		text-decoration: underline;
-	}
-
-	.info {
-		margin-bottom: 2rem;
-	}
-
-	.price {
-		font-size: 1.1rem;
-		margin: 0 0 0.75rem;
-		color: #555;
-	}
-
-	.price strong {
-		color: #1a1a1a;
-	}
-
-	.description {
-		font-size: 1rem;
-		line-height: 1.7;
-		color: #444;
-		margin: 0 0 1rem;
-		max-width: 72ch;
-	}
-
-	.minimum {
-		display: inline-block;
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: #8b6f47;
-		border: 1px solid #c9a97a;
-		border-radius: 6px;
-		padding: 0.3rem 0.75rem;
-		margin: 0 0 1.25rem;
-	}
-
-	.features {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem 1.5rem;
-	}
-
-	.features li {
-		font-size: 0.95rem;
-		color: #444;
-	}
-
-	.gallery {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-		gap: 1rem;
-	}
-
-	.photo {
-		display: block;
-		overflow: hidden;
-		border-radius: 8px;
-		aspect-ratio: 4/3;
-		background: #e8e3dc;
-		border: none;
-		padding: 0;
-		cursor: pointer;
-	}
-
-	.photo img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.3s ease;
-	}
-
-	.photo:hover img {
-		transform: scale(1.04);
-	}
-</style>
+<VillaPage
+	title="Villa Xique 11 — Elevenchique"
+	name="Villa Xique 11"
+	price="€80/dia"
+	descKey="villa-xique-11.desc"
+	desc="Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa."
+	minKey="min.4"
+	min="Mínimo 4 noites"
+	features={[
+		{ key: 'xique11.feat.beds',    text: '🛍️ 1 cama de casal' },
+		{ key: 'xique11.feat.pax',     text: '👥 2+1 pax' },
+		{ key: 'xique11.feat.wc',      text: '🚿 1 WC' },
+		{ key: 'xique11.feat.kitchen', text: '🍽️ Totalmente equipada' },
+		{ key: 'xique11.feat.checkin', text: '🔑 Self Check-in' },
+		{ key: 'xique11.feat.center',  text: '🛒 Perto do Centro' },
+	]}
+	bookings={[
+		{ href: 'https://www.airbnb.pt/rooms/949870084784436944?guests=1&adults=1&s=67&unique_share_id=92de3315-96bb-411e-92e9-84e4e0f7df85', cls: 'airbnb', label: 'Airbnb' },
+		{ href: 'https://holidu.go.link/holidu.pt/d/53520965?utm_term=CLIPBOARD&utm_source=web_share&adj_t=1m2swn8m&adj_redirect=https://www.holidu.pt/d/53520965?utm_source%3Dweb_share%26utm_term%3DCLIPBOARD', cls: 'holidu', label: 'Holidu' },
+		{ href: 'https://www.booking.com/Share-eDq7EcI', cls: 'bookingcom', label: 'Booking.com' },
+	]}
+	images={images}
+/>

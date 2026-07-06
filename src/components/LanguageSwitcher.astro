@@ -1,0 +1,43 @@
+---
+import { languages } from '../i18n/ui';
+---
+
+<div class="lang-switcher" role="group" aria-label="Language switcher">
+	{Object.entries(languages).map(([code, { label, flag }]) => (
+		<button class="lang-btn" data-lang={code} aria-label={label} type="button">
+			<span aria-hidden="true">{flag}</span> {label}
+		</button>
+	))}
+</div>
+
+<style>
+	.lang-switcher {
+		display: flex;
+		gap: 0.25rem;
+	}
+
+	.lang-btn {
+		background: transparent;
+		border: 1px solid transparent;
+		border-radius: 6px;
+		padding: 0.3rem 0.55rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #666;
+		cursor: pointer;
+		transition: color 0.15s, border-color 0.15s, background 0.15s;
+		font-family: inherit;
+		line-height: 1;
+	}
+
+	.lang-btn:hover {
+		color: #1a1a1a;
+		background: rgba(0, 0, 0, 0.05);
+	}
+
+	.lang-btn.active {
+		color: #8b6f47;
+		border-color: #c9a97a;
+		background: #fdf7f0;
+	}
+</style>

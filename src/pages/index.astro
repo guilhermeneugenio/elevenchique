@@ -1,30 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import villaTuchaImg from '../assets/Villa Tucha/557367909.jpg';
+import villaXique9Img from '../assets/Villa Xique 9/494102783.jpg';
+import villaXique11Img from '../assets/Villa Xique 11/494097985.jpg';
 
 const villas = [
 	{
 		name: 'Villa Tucha',
 		slug: 'villa-tucha',
-		url: 'https://rose-tambourine-abyl.squarespace.com/villa-tucha',
 		price: '€260/dia',
 		description: 'Em Alvor, esta villa dispõe de acomodações com acesso Wi-Fi gratuito, ar condicionado, 4 quartos, 5 casas de banho, roupa de cama, toalhas, uma televisão com canais por cabo, uma cozinha totalmente equipada e um terraço com vista da montanha.',
+		descKey: 'villa-tucha.desc',
 		minimum: 'Mínimo 5 noites',
+		minKey: 'min.5',
+		image: villaTuchaImg,
 	},
 	{
 		name: 'Villa Xique 9',
 		slug: 'villa-xique-9',
-		url: 'https://rose-tambourine-abyl.squarespace.com/villa-xique-9',
 		price: '€95/dia',
 		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento com ar condicionado tem 2 quartos, uma sala de estar, uma cozinha totalmente equipada e 2 casas de banho com chuveiro, com todas as comodidades providenciadas.',
+		descKey: 'villa-xique-9.desc',
 		minimum: 'Mínimo 4 noites',
+		minKey: 'min.4',
+		image: villaXique9Img,
 	},
 	{
 		name: 'Villa Xique 11',
 		slug: 'villa-xique-11',
-		url: 'https://rose-tambourine-abyl.squarespace.com/villa-xique-11',
 		price: '€80/dia',
 		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa.',
+		descKey: 'villa-xique-11.desc',
 		minimum: 'Mínimo 4 noites',
+		minKey: 'min.4',
+		image: villaXique11Img,
 	},
 ];
 ---
@@ -33,16 +43,19 @@ const villas = [
 	<main>
 		<header>
 			<h1>Elevenchique</h1>
-			<p>Select a villa to explore its gallery</p>
+			<p data-i18n="tagline">Selecione uma villa para explorar a galeria</p>
 		</header>
 		<div class="grid">
 			{villas.map(villa => (
 				<a href={`/${villa.slug}`} class="card">
-					<h2>{villa.name}</h2>
-					{villa.price && <p class="price">Desde <strong>{villa.price}</strong></p>}
-					<p class="description">{villa.description}</p>
-					{villa.minimum && <p class="minimum">{villa.minimum}</p>}
-					<span class="cta">Ver galeria →</span>
+					{villa.image && <Image src={villa.image} alt={villa.name} class="card-img" widths={[600]} sizes="(max-width: 960px) 100vw, 320px" loading="lazy" />}
+					<div class="card-body">
+						<h2>{villa.name}</h2>
+						{villa.price && <p class="price"><span data-i18n="card.from">Desde</span> <strong>{villa.price}</strong></p>}
+						<p class="description" data-i18n={villa.descKey}>{villa.description}</p>
+						{villa.minimum && <p class="minimum" data-i18n={villa.minKey}>{villa.minimum}</p>}
+						<span class="cta" data-i18n="card.cta">Ver galeria →</span>
+					</div>
 				</a>
 			))}
 		</div>
@@ -81,14 +94,26 @@ const villas = [
 	}
 
 	.card {
-		display: block;
-		padding: 2rem;
+		display: flex;
+		flex-direction: column;
 		border: 1px solid #e0dbd4;
 		border-radius: 12px;
 		background: #fff;
 		text-decoration: none;
 		color: inherit;
+		overflow: hidden;
 		transition: box-shadow 0.2s, transform 0.2s;
+	}
+
+	.card-img {
+		width: 100%;
+		height: 220px;
+		object-fit: cover;
+		display: block;
+	}
+
+	.card-body {
+		padding: 1.5rem;
 	}
 
 	.card:hover {
