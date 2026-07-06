@@ -1,6 +1,8 @@
 ---
 import VillaPage from '../components/VillaPage.astro';
+import { villaBySlug } from '../data/villas';
 
+const meta = villaBySlug['villa-xique-11'];
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 	'../assets/Villa Xique 11/*.jpg',
 	{ eager: true }
@@ -8,26 +10,4 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 const images = Object.values(imageModules).map(m => m.default);
 ---
 
-<VillaPage
-	title="Villa Xique 11 — Elevenchique"
-	name="Villa Xique 11"
-	price="€80/dia"
-	descKey="villa-xique-11.desc"
-	desc="Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa."
-	minKey="min.4"
-	min="Mínimo 4 noites"
-	features={[
-		{ key: 'xique11.feat.beds',    text: '🛍️ 1 cama de casal' },
-		{ key: 'xique11.feat.pax',     text: '👥 2+1 pax' },
-		{ key: 'xique11.feat.wc',      text: '🚿 1 WC' },
-		{ key: 'xique11.feat.kitchen', text: '🍽️ Totalmente equipada' },
-		{ key: 'xique11.feat.checkin', text: '🔑 Self Check-in' },
-		{ key: 'xique11.feat.center',  text: '🛒 Perto do Centro' },
-	]}
-	bookings={[
-		{ href: 'https://www.airbnb.pt/rooms/949870084784436944?guests=1&adults=1&s=67&unique_share_id=92de3315-96bb-411e-92e9-84e4e0f7df85', cls: 'airbnb', label: 'Airbnb' },
-		{ href: 'https://holidu.go.link/holidu.pt/d/53520965?utm_term=CLIPBOARD&utm_source=web_share&adj_t=1m2swn8m&adj_redirect=https://www.holidu.pt/d/53520965?utm_source%3Dweb_share%26utm_term%3DCLIPBOARD', cls: 'holidu', label: 'Holidu' },
-		{ href: 'https://www.booking.com/Share-eDq7EcI', cls: 'bookingcom', label: 'Booking.com' },
-	]}
-	images={images}
-/>
+<VillaPage {...meta} images={images} />

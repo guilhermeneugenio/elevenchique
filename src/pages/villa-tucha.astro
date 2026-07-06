@@ -1,6 +1,8 @@
 ---
 import VillaPage from '../components/VillaPage.astro';
+import { villaBySlug } from '../data/villas';
 
+const meta = villaBySlug['villa-tucha'];
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 	'../assets/Villa Tucha/*.jpg',
 	{ eager: true }
@@ -8,26 +10,4 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 const images = Object.values(imageModules).map(m => m.default);
 ---
 
-<VillaPage
-	title="Villa Tucha — Elevenchique"
-	name="Villa Tucha"
-	price="€260/dia"
-	descKey="villa-tucha.desc"
-	desc="Em Alvor, esta villa dispõe de acomodações com acesso Wi-Fi gratuito, ar condicionado, 4 quartos, 5 casas de banho, roupa de cama, toalhas, uma televisão com canais por cabo, uma cozinha totalmente equipada e um terraço com vista da montanha."
-	minKey="min.5"
-	min="Mínimo 5 noites"
-	features={[
-		{ key: 'tucha.feat.beds', text: '🛏 4 Quartos' },
-		{ key: 'tucha.feat.pax',  text: '👥 8 pax' },
-		{ key: 'tucha.feat.wc',   text: '🚿 5 WCs' },
-		{ key: 'tucha.feat.pool', text: '🏊 Piscina' },
-		{ key: 'tucha.feat.garage', text: '🚗 Garagem' },
-		{ key: 'tucha.feat.beach',  text: '🏖️ Perto de Praias' },
-	]}
-	bookings={[
-		{ href: 'https://www.airbnb.pt/rooms/1156370166192959099?source_impression_id=p3_1747993977_P3Taht2su9eJaLPC', cls: 'airbnb', label: 'Airbnb' },
-		{ href: 'https://holidu.go.link/holidu.pt/d/51527509?utm_term=CLIPBOARD&utm_source=web_share&adj_t=1m2swn8m&adj_redirect=https://www.holidu.pt/d/51527509?utm_source%3Dweb_share%26utm_term%3DCLIPBOARD', cls: 'holidu', label: 'Holidu' },
-		{ href: 'https://www.booking.com/Share-snsEAdC', cls: 'bookingcom', label: 'Booking.com' },
-	]}
-	images={images}
-/>
+<VillaPage {...meta} images={images} />

@@ -1,0 +1,13 @@
+---
+import VillaPage from '../components/VillaPage.astro';
+import { villaBySlug } from '../data/villas';
+
+const meta = villaBySlug['olhao'];
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/olhao/*.{jpg,jpeg,JPEG}',
+	{ eager: true }
+);
+const images = Object.values(imageModules).map(m => m.default);
+---
+
+<VillaPage {...meta} images={images} />

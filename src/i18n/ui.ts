@@ -13,7 +13,6 @@ export const ui: Record<Locale, Record<string, string>> = {
 	pt: {
 		tagline: 'Selecione uma villa para explorar a galeria',
 		'card.from': 'Desde',
-		'card.cta': 'Ver galeria →',
 		'nav.back': '← Villas',
 		'villa-tucha.desc':
 			'Em Alvor, esta villa dispõe de acomodações com acesso Wi-Fi gratuito, ar condicionado, 4 quartos, 5 casas de banho, roupa de cama, toalhas, uma televisão com canais por cabo, uma cozinha totalmente equipada e um terraço com vista da montanha.',
@@ -23,6 +22,15 @@ export const ui: Record<Locale, Record<string, string>> = {
 			'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa.',
 		'min.5': 'Mínimo 5 noites',
 		'min.4': 'Mínimo 4 noites',
+		'min.3': 'Mínimo 3 noites',
+		'villa-eugene.desc':
+			'Em Olhão, a apenas 500 metros das deslumbrantes ilhas da Ria Formosa, a Villa Eugéne é o refúgio perfeito para umas férias em família inesquecíveis, com 2 quartos, piscina privada e um encantador terraço com pérgola para desfrutar do melhor do Algarve.',
+		'eugene.feat.beds': '🛍️ 2 Quartos',
+		'eugene.feat.sofa': '🛋️ 1 sofá-cama',
+		'eugene.feat.pool': '🏊 Piscina privada',
+		'eugene.feat.garden': '🌿 Quintal privado',
+		'eugene.feat.terrace': '☀️ Terraço com pérgola',
+		'eugene.feat.ferry': '🏖️ 500m das ilhas',
 		'tucha.feat.beds': '🛏 4 Quartos',
 		'tucha.feat.pax': '👥 8 pax',
 		'tucha.feat.wc': '🚿 5 WCs',
@@ -45,7 +53,6 @@ export const ui: Record<Locale, Record<string, string>> = {
 	en: {
 		tagline: 'Select a villa to explore its gallery',
 		'card.from': 'From',
-		'card.cta': 'View gallery →',
 		'nav.back': '← Villas',
 		'villa-tucha.desc':
 			'In Alvor, this villa offers accommodation with free Wi-Fi, air conditioning, 4 bedrooms, 5 bathrooms, bed linen, towels, cable TV, a fully equipped kitchen and a terrace with mountain views.',
@@ -55,6 +62,15 @@ export const ui: Record<Locale, Record<string, string>> = {
 			'In Monchique, perfect for hiking and cycling, this apartment has 1 bedroom with a pleasant bathroom, a living room with TV, and a kitchen equipped with a fridge, dishwasher and washing machine.',
 		'min.5': 'Minimum 5 nights',
 		'min.4': 'Minimum 4 nights',
+		'min.3': 'Minimum 3 nights',
+		'villa-eugene.desc':
+			'In Olhão, just 500 metres from the stunning Ria Formosa islands, Villa Eugéne is the perfect retreat for an unforgettable family holiday, with 2 bedrooms, a private pool and a charming pergola terrace to enjoy the best of the Algarve.',
+		'eugene.feat.beds': '🛍️ 2 Bedrooms',
+		'eugene.feat.sofa': '🛋️ 1 sofa bed',
+		'eugene.feat.pool': '🏊 Private pool',
+		'eugene.feat.garden': '🌿 Private garden',
+		'eugene.feat.terrace': '☀️ Terrace with pergola',
+		'eugene.feat.ferry': '🏖️ 500m from ferry',
 		'tucha.feat.beds': '🛏 4 Bedrooms',
 		'tucha.feat.pax': '👥 8 guests',
 		'tucha.feat.wc': '🚿 5 Bathrooms',
@@ -77,7 +93,6 @@ export const ui: Record<Locale, Record<string, string>> = {
 	fr: {
 		tagline: 'Sélectionnez une villa pour explorer sa galerie',
 		'card.from': 'À partir de',
-		'card.cta': 'Voir la galerie →',
 		'nav.back': '← Villas',
 		'villa-tucha.desc':
 			"À Alvor, cette villa propose un hébergement avec Wi-Fi gratuit, climatisation, 4 chambres, 5 salles de bain, linge de lit, serviettes, une télévision câblée, une cuisine entièrement équipée et une terrasse avec vue sur la montagne.",
@@ -87,6 +102,15 @@ export const ui: Record<Locale, Record<string, string>> = {
 			"À Monchique, idéale pour la randonnée et le cyclisme, cet appartement dispose d'1 chambre avec salle de bain, un salon avec télévision, et une cuisine équipée d'un réfrigérateur, d'un lave-vaisselle et d'un lave-linge.",
 		'min.5': 'Minimum 5 nuits',
 		'min.4': 'Minimum 4 nuits',
+		'min.3': 'Minimum 3 nuits',
+		'villa-eugene.desc':
+			"À Olhão, à seulement 500 mètres des splendides îles de la Ria Formosa, la Villa Eugéne est le refuge idéal pour des vacances en famille inoubliables, avec 2 chambres, une piscine privée et une charmante terrasse avec pergola pour profiter du meilleur de l'Algarve.",
+		'eugene.feat.beds': '🛍️ 2 Chambres',
+		'eugene.feat.sofa': '🛋️ 1 canapé-lit',
+		'eugene.feat.pool': '🏊 Piscine privée',
+		'eugene.feat.garden': '🌿 Jardin privé',
+		'eugene.feat.terrace': '☀️ Terrasse avec pergola',
+		'eugene.feat.ferry': '🏖️ 500m du ferry',
 		'tucha.feat.beds': '🛏 4 Chambres',
 		'tucha.feat.pax': '👥 8 personnes',
 		'tucha.feat.wc': '🚿 5 Salles de bain',
@@ -109,7 +133,6 @@ export const ui: Record<Locale, Record<string, string>> = {
 	es: {
 		tagline: 'Seleccione una villa para explorar su galería',
 		'card.from': 'Desde',
-		'card.cta': 'Ver galería →',
 		'nav.back': '← Villas',
 		'villa-tucha.desc':
 			'En Alvor, esta villa ofrece alojamiento con Wi-Fi gratuito, aire acondicionado, 4 dormitorios, 5 baños, ropa de cama, toallas, televisión por cable, una cocina totalmente equipada y una terraza con vistas a la montaña.',
@@ -119,6 +142,15 @@ export const ui: Record<Locale, Record<string, string>> = {
 			'En Monchique, ideal para senderismo y ciclismo, este apartamento tiene 1 dormitorio con baño, sala de estar con TV, y cocina equipada con frigorífico, lavavajillas y lavadora.',
 		'min.5': 'Mínimo 5 noches',
 		'min.4': 'Mínimo 4 noches',
+		'min.3': 'Mínimo 3 noches',
+		'villa-eugene.desc':
+			'En Olhão, a tan solo 500 metros de las deslumbrantes islas de la Ría Formosa, Villa Eugéne es el refugio perfecto para unas vacaciones familiares inolvidables, con 2 dormitorios, piscina privada y una encantadora terraza con pérgola para disfrutar de lo mejor del Algarve.',
+		'eugene.feat.beds': '🛍️ 2 Dormitorios',
+		'eugene.feat.sofa': '🛋️ 1 sofá-cama',
+		'eugene.feat.pool': '🏊 Piscina privada',
+		'eugene.feat.garden': '🌿 Jardín privado',
+		'eugene.feat.terrace': '☀️ Terraza con pérgola',
+		'eugene.feat.ferry': '🏖️ 500m del ferry',
 		'tucha.feat.beds': '🛏 4 Dormitorios',
 		'tucha.feat.pax': '👥 8 personas',
 		'tucha.feat.wc': '🚿 5 Baños',

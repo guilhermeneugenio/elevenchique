@@ -1,42 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+import { villas } from '../data/villas';
 import villaTuchaImg from '../assets/Villa Tucha/557367909.jpg';
 import villaXique9Img from '../assets/Villa Xique 9/494102783.jpg';
 import villaXique11Img from '../assets/Villa Xique 11/494097985.jpg';
+import villaOlhaoImg from '../assets/olhao/2.jpg';
 
-const villas = [
-	{
-		name: 'Villa Tucha',
-		slug: 'villa-tucha',
-		price: '€260/dia',
-		description: 'Em Alvor, esta villa dispõe de acomodações com acesso Wi-Fi gratuito, ar condicionado, 4 quartos, 5 casas de banho, roupa de cama, toalhas, uma televisão com canais por cabo, uma cozinha totalmente equipada e um terraço com vista da montanha.',
-		descKey: 'villa-tucha.desc',
-		minimum: 'Mínimo 5 noites',
-		minKey: 'min.5',
-		image: villaTuchaImg,
-	},
-	{
-		name: 'Villa Xique 9',
-		slug: 'villa-xique-9',
-		price: '€95/dia',
-		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento com ar condicionado tem 2 quartos, uma sala de estar, uma cozinha totalmente equipada e 2 casas de banho com chuveiro, com todas as comodidades providenciadas.',
-		descKey: 'villa-xique-9.desc',
-		minimum: 'Mínimo 4 noites',
-		minKey: 'min.4',
-		image: villaXique9Img,
-	},
-	{
-		name: 'Villa Xique 11',
-		slug: 'villa-xique-11',
-		price: '€80/dia',
-		description: 'Em Monchique, ideal para desfrutar de atividades como caminhadas e ciclismo, este apartamento tem 1 quarto com uma agradável casa de banho, uma sala com televisão, uma cozinha equipada com frigorífico e máquina de lavar louça e roupa.',
-		descKey: 'villa-xique-11.desc',
-		minimum: 'Mínimo 4 noites',
-		minKey: 'min.4',
-		image: villaXique11Img,
-	},
-];
+const coverImages: Record<string, ImageMetadata> = {
+	'villa-tucha': villaTuchaImg,
+	'villa-xique-9': villaXique9Img,
+	'villa-xique-11': villaXique11Img,
+	'olhao': villaOlhaoImg,
+};
 ---
 
 <Layout title="Elevenchique — Villas">
@@ -48,13 +24,14 @@ const villas = [
 		<div class="grid">
 			{villas.map(villa => (
 				<a href={`/${villa.slug}`} class="card">
-					{villa.image && <Image src={villa.image} alt={villa.name} class="card-img" widths={[600]} sizes="(max-width: 960px) 100vw, 320px" loading="lazy" />}
+					<Image src={coverImages[villa.slug]} alt={villa.name} class="card-img" widths={[600]} sizes="(max-width: 960px) 100vw, 320px" loading="lazy" />
 					<div class="card-body">
 						<h2>{villa.name}</h2>
-						{villa.price && <p class="price"><span data-i18n="card.from">Desde</span> <strong>{villa.price}</strong></p>}
-						<p class="description" data-i18n={villa.descKey}>{villa.description}</p>
-						{villa.minimum && <p class="minimum" data-i18n={villa.minKey}>{villa.minimum}</p>}
-						<span class="cta" data-i18n="card.cta">Ver galeria →</span>
+						<p class="price"><span data-i18n="card.from">Desde</span> <strong>{villa.price}</strong></p>
+						<p class="description" data-i18n={villa.descKey}>{villa.desc}</p>
+					<div class="card-footer">
+						<p class="minimum" data-i18n={villa.minKey}>{villa.min}</p>
+					</div>
 					</div>
 				</a>
 			))}
@@ -64,7 +41,7 @@ const villas = [
 
 <style>
 	main {
-		max-width: 960px;
+		max-width: 1400px;
 		margin: 0 auto;
 		padding: 4rem 1.5rem;
 	}
@@ -89,8 +66,20 @@ const villas = [
 
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-template-columns: repeat(4, 1fr);
 		gap: 1.5rem;
+	}
+
+	@media (max-width: 900px) {
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 500px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.card {
@@ -114,6 +103,14 @@ const villas = [
 
 	.card-body {
 		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.card-footer {
+		margin-top: auto;
+		padding-top: 1rem;
 	}
 
 	.card:hover {
@@ -153,12 +150,6 @@ const villas = [
 		border: 1px solid #c9a97a;
 		border-radius: 6px;
 		padding: 0.25rem 0.6rem;
-		margin: 0 0 1rem;
-	}
-
-	.cta {
-		font-size: 0.9rem;
-		font-weight: 600;
-		color: #8b6f47;
+		margin: 0;
 	}
 </style>

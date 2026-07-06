@@ -15,9 +15,8 @@ interface Booking {
 }
 
 interface Props {
-	title: string;
+	title?: string;
 	name: string;
-	url?: string;
 	price: string;
 	descKey: string;
 	desc: string;
@@ -28,14 +27,14 @@ interface Props {
 	images: ImageMetadata[];
 }
 
-const { title, name, url, price, descKey, desc, minKey, min, features, bookings, images } =
+const { title = `${Astro.props.name} — Elevenchique`, name, price, descKey, desc, minKey, min, features, bookings, images } =
 	Astro.props;
 ---
 
 <Layout title={title}>
 	<main>
 		<nav><a href="/" data-i18n="nav.back">← Villas</a></nav>
-		<h1>{url ? <a href={url} target="_blank" rel="noopener">{name}</a> : name}</h1>
+		<h1>{name}</h1>
 		<div class="info">
 			<p class="price"><span data-i18n="card.from">Desde</span> <strong>{price}</strong></p>
 			<p class="description" data-i18n={descKey}>{desc}</p>
